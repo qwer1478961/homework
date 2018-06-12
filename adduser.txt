@@ -1,0 +1,26 @@
+<html>
+<body>
+<h2>新增使用者</h2>
+<form action="" method="POST">
+    <input type="text" name="account" value="" placeholder="帳號" required>
+	<input type="password" name="password" value="" placeholder="密碼" required>
+    <input type="submit" value="add">
+</form>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $dsn = "mysql:host=localhost;dbname=test";
+    $db = new PDO($dsn, 'root', '');
+    $account = $_POST['account'];
+    $password = $_POST['password'];
+    $add = $db->query("INSERT INTO users (account,password) VALUES ('$account','$password')");
+    $result = $add->execute();//取資料
+	if($result){
+		echo "<span>新增成功</span>";
+	}
+	else{
+		echo "<span>新增失敗</span>";
+	}
+}
+?>
+</body>
+</html>

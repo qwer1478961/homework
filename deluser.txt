@@ -1,0 +1,24 @@
+<html>
+<body>
+<h2>刪除使用者</h2>
+<form action="" method="POST">
+    <input type="text" name="account" value="" placeholder="帳號" required>
+    <input type="submit" value="delete">
+</form>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $dsn = "mysql:host=localhost;dbname=test";
+    $db = new PDO($dsn, 'root', '');
+    $account = $_POST['account'];
+    $del = $db->query("DELETE FROM users WHERE account = '$account'");
+    $result = $del->execute();
+	if($result){
+		echo "<span>刪除成功</span>";
+	}
+	else{
+		echo "<span>刪除失敗</span>";
+	}
+}
+?>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+<body>
+<h2>修改使用者</h2>
+<form action="" method="POST">
+    <input type="text" name="account" value="" placeholder="帳號" required>
+	<input type="password" name="password" value="" placeholder="密碼" required>
+    <input type="submit" value="reup">
+</form>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $dsn = "mysql:host=localhost;dbname=test";
+    $db = new PDO($dsn, 'root', '');
+    $account = $_POST['account'];
+	$password = $_POST['password'];
+	$reup = $db->query("UPDATE users SET password = '$password' WHERE account ='$account' "); 
+    $result = $reup->execute();
+	if($result){
+		echo "<span>修改成功</span>";
+	}
+	else{
+		echo "<span>修改失敗</span>";
+	}
+}
+?>
+</body>
+</html>
